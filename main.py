@@ -11,7 +11,7 @@ dp = Dispatcher(bot)
 
 
 @dp.message_handler(commands=["start"])
-async def zodiacks_list(message: types.Message):
+async def zodiac_sign_list(message: types.Message):
     await message.reply(main_message(), reply_markup=kb.menu)
 
 

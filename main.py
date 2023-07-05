@@ -2,7 +2,7 @@ import logging
 from aiogram import Bot, Dispatcher, executor, types
 
 import kb
-from text import *
+from bot import main_message
 from config import TOKEN
 
 logging.basicConfig(level=logging.INFO)
@@ -12,13 +12,13 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=["start"])
 async def zodiacks_list(message: types.Message):
-    await message.reply(choose_sign, reply_markup=kb.signs)
+    await message.reply(main_message(), reply_markup=kb.menu)
 
 
-@dp.callback_query_handler(lambda callback: zodiacks_list(callback))
-async def sign_content(callback_query: types.CallbackQuery):
-    await bot.answer_callback_query(callback_query.id)
-    await bot.send_message(callback_query.from_user.id, 'Hmmmm')
+@dp.callback_query_handler()
+async def sign_content(callback: types.CallbackQuery):
+    await bot.answer_callback_query(callback.id)
+    await bot.send_message(callback.from_user.id, sign_list(callback.data))
 
 
 if __name__ == "__main__":

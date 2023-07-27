@@ -3,41 +3,35 @@ from bs4 import BeautifulSoup as Bs
 
 from text import *
 
+SIGN_LIST = ['aurus', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn',
+        'aquarius', 'pisces']
+
+
+class HoroscopeParser:
+    def __init__(self):
+        self.url = 'https://horo.mail.ru/prediction/'
+
+    def get_horoscope(self):
+        r = requests.get(self.url)
+        soup = Bs(r.text, 'lxml')
+        links = soup.find_all('div', class_='article__item article__item_alignment_left article__item_html')
+        return links
+
+    def get_horoscope_with_url(self, additional_url):
+        self.url += additional_url
+        horoscope_links = self.get_horoscope()
+        return horoscope_links
+
 
 def main_message():
-    r = requests.get('https://horo.mail.ru/')
-    soup = Bs(r.text, 'lxml')
-    links = soup.find_all('div', class_='article__item article__item_alignment_left article__item_html')
-    for item in links:
+    parser = HoroscopeParser()
+    horoscope_links = parser.get_horoscope()
+    for item in horoscope_links:
         return f'{today}\n\n{item.text}\n{choose_sign}'
 
 
-# def sign_list(callback):
-
-    # sign = callback
-    # url = 'https://horo.mail.ru/' + 'prediction/' + sign
-    # r = requests.get('https://horo.mail.ru/')
-    # soup = Bs(r.text, 'lxml')
-    # links = soup.find_all('div', class_='article__item article__item_alignment_left article__item_html')
-    # for item in links:
-    #     callback = item.text
-
-    #     urls_list = f'{r}{i["href"]}'
-    #     clear_link = urls_list.replace('today/', '')
-    #     # signs_urls.append(clear_link)
-
-    # print(links)
-    # return callback
-
-# def content(callback):
-#     """
-#     Функция принимает выбранный знак зодиака,
-#     находит, по ключу, ссылку на его страницу и возвращает текст
-#
-#     :param callback: полученное значение знака зодиака из функции sign_content
-#     :return: Обработанный текст
-#     """
-#     sign_content = requests.get(sign_list(URL).setdefault(callback.data))
-#     soup = Bs(sign_content.text, 'html.parser')
-#     selected_sign = soup.find_all('div', class_='article__item article__item_alignment_left article__item_html')
-#     return ' '.join([s.text for s in selected_sign])
+def sign_message(callback):
+    parser = HoroscopeParser()
+    horoscope_links = parser.get_horoscope_with_url(additional_url=f'{callback.data}')
+    for item in horoscope_links:
+        return f'{sign}{callback.data}\n\n{item.text}\n'

@@ -3,7 +3,7 @@ import logging
 from aiogram import Bot, Dispatcher, executor, types
 
 import kb
-from bot import main_message, sign_message, SIGN_LIST
+from utils import main_message, sign_message, SIGN_LIST
 from config import TOKEN
 
 logging.basicConfig(level=logging.INFO)

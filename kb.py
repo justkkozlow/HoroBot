@@ -1,7 +1,7 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 menu = [
-    [InlineKeyboardButton('♈ Овен', callback_data='aurus'),
+    [InlineKeyboardButton('♈ Овен', callback_data='aries'),
      InlineKeyboardButton('♉ Телец', callback_data='taurus'),
      InlineKeyboardButton('♊ Близнецы', callback_data='gemini')],
     [InlineKeyboardButton('♋ Рак', callback_data='cancer'),

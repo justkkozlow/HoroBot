@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-menu = [
+signs_btn = [
     [InlineKeyboardButton('♈ Овен', callback_data='aries'),
      InlineKeyboardButton('♉ Телец', callback_data='taurus'),
      InlineKeyboardButton('♊ Близнецы', callback_data='gemini')],
@@ -15,4 +15,14 @@ menu = [
      InlineKeyboardButton('♓ Рыбы', callback_data='pisces')]
 ]
 
-menu = InlineKeyboardMarkup(inline_keyboard=menu)
+signs_btn = InlineKeyboardMarkup(inline_keyboard=signs_btn)
+
+date_btn = [
+    [InlineKeyboardButton('Вчера', callback_data='yesterday'),
+     InlineKeyboardButton('Завтра', callback_data='tomorrow')],
+    [InlineKeyboardButton('Неделя', callback_data='week'),
+     InlineKeyboardButton('Месяц', callback_data='month')],
+    [InlineKeyboardButton('Год', callback_data='year')]
+]
+
+date_btn = InlineKeyboardMarkup(inline_keyboard=date_btn)

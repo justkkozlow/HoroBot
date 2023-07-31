@@ -15,6 +15,10 @@ SIGN_DICT = {
     'pisces': 'Рыбы'
 }
 
+SING_DATE = [
+    'yesterday', 'tomorrow', 'week', 'month', 'year'
+]
+
 date_now = datetime.now().strftime("%d.%m.%Y")
 
 today = f'Гороскоп для всех знаков на 🗓 {date_now}'

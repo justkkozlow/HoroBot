@@ -16,20 +16,17 @@ class HoroscopeParser:
 
     def get_horoscope_with_url(self, additional_url):
         self.url += additional_url
-        horoscope_links = self.get_horoscope()
-        return horoscope_links
+        return self.get_horoscope()
 
 
 def main_message():
     parser = HoroscopeParser()
     horoscope_links = parser.get_horoscope()
-    for item in horoscope_links:
-        return f'{text.today}\n\n{item.text}\n{text.choose_sign}'
+    return '\n\n'.join([f'{text.today}\n\n{item.text}\n{text.choose_sign}' for item in horoscope_links])
 
 
 def sign_message(callback):
     parser = HoroscopeParser()
     horoscope_links = parser.get_horoscope_with_url(additional_url=f'{callback.data}')
     sign_value = text.SIGN_DICT.get(callback.data)
-    for item in horoscope_links:
-        return f'{text.sign}{sign_value}\n\n{item.text}\n'
+    return '\n\n'.join([f'{text.sign}{sign_value}\n\n{item.text}\n' for item in horoscope_links])

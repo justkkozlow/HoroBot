@@ -26,7 +26,10 @@ async def sign_content(callback: types.CallbackQuery):
 @dp.callback_query_handler(lambda callback: callback.data in SING_DATE)
 async def select_date(callback: types.CallbackQuery):
     await bot.answer_callback_query(callback.id)
-    await bot.send_message(callback.from_user.id, utils.on_date(callback), reply_markup=kb.date_btn)
+    await bot.edit_message_text(chat_id=callback.message.chat.id,
+                                message_id=callback.message.message_id,
+                                text=f'{utils.on_date(callback)}',
+                                reply_markup=kb.date_btn)
 
 
 if __name__ == "__main__":

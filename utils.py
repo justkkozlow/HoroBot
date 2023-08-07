@@ -22,13 +22,13 @@ class HoroscopeParser:
         return self.get_horoscope()
 
 
+save_sign = []
+
+
 def main_message():
     parser = HoroscopeParser()
     horoscope_links = parser.get_horoscope()
-    return '\n\n'.join([f'{text.today}\n\n{item.text}\n{text.choose_sign}' for item in horoscope_links])
-
-
-save_sign = []
+    return '\n\n'.join([f'{text.today}:\n\n{item.text}\n{text.choose_sign}' for item in horoscope_links])
 
 
 def sign_message(callback):
@@ -36,11 +36,11 @@ def sign_message(callback):
     save_sign.append(callback.data)
     horoscope_links = parser.get_horoscope_with_url(additional_url=f'{callback.data}')
     sign_value = text.SIGN_DICT.get(callback.data)
-    return '\n\n'.join([f'{text.sign}{sign_value}\n\n{item.text}\n' for item in horoscope_links])
+    return '\n\n'.join([f'{sign_value}\n\n{item.text}\n' for item in horoscope_links])
 
 
 def on_date(callback):
     parser = HoroscopeParser()
     horoscope_links = parser.get_horoscope_with_url(additional_url=f'{save_sign[-1]}/{callback.data}')
-    sign_value = text.SIGN_DICT.get(callback.data)
-    return '\n\n'.join([f'{text.sign}{sign_value}\n\n{item.text}\n' for item in horoscope_links])
+    sign_value = text.SIGN_DICT.get(save_sign[-1])
+    return '\n\n'.join([f'{sign_value}\n\n{item.text}\n' for item in horoscope_links])

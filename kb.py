@@ -19,11 +19,12 @@ signs_btn = InlineKeyboardMarkup(inline_keyboard=signs_btn)
 
 date_btn = [
     [InlineKeyboardButton('Вчера', callback_data='yesterday'),
-     InlineKeyboardButton('Сегодня', callback_data='today'),
-     InlineKeyboardButton('Завтра', callback_data='tomorrow'),
-     InlineKeyboardButton('Неделя', callback_data='week'),
-     InlineKeyboardButton('Месяц', callback_data='month'),
+     InlineKeyboardButton('Сегодня', callback_data='today')],
+    [InlineKeyboardButton('Завтра', callback_data='tomorrow'),
+     InlineKeyboardButton('Неделя', callback_data='week')],
+    [InlineKeyboardButton('Месяц', callback_data='month'),
      InlineKeyboardButton('Год', callback_data='year')],
+
     [InlineKeyboardButton('Подписаться', callback_data='subscribe')]
 ]
 

@@ -1,7 +1,8 @@
 import sqlite3
+import config
 
 # Подключение к базе данных
-conn = sqlite3.connect('horo.db')
+conn = sqlite3.connect(config.DB)
 cursor = conn.cursor()
 
 # Создание таблицы для хранения информации о пользователях
@@ -30,3 +31,25 @@ def save_zodiac_sign(user_id, sign):
         ON CONFLICT (id) DO UPDATE SET sign=excluded.sign
     ''', (user_id, sign))
     conn.commit()
+
+
+
+# # Функция для отправки гороскопа
+# async def send_horoscope():
+#     # Получение текущей даты и времени
+#     current_time = datetime.now()
+#
+#     # Получение всех пользователей из базы данных
+#     cursor.execute('SELECT id, sign FROM users')
+#     users = cursor.fetchall()
+#
+#     for user in users:
+#         user_id = user[0]
+#         sign = user[1]
+#
+#         # Отправка гороскопа пользователю
+#         await bot.send_message(user_id, f"Ваш гороскоп на сегодня ({current_time.strftime('%Y-%m-%d')}): ...")
+#
+#     # Планирование повторной отправки гороскопа через 24 часа
+#     next_time = current_time + timedelta(days=1)
+#     dp.loop.call_later(86400, send_horoscope)
